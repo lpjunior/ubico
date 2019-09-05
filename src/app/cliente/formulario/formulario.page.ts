@@ -13,17 +13,17 @@ export class FormularioPage implements OnInit {
   clienteForm: FormGroup;
   cliente: Cliente;
   
-  constructor(private formBuilder: FormBuilder, private clienteModel: Cliente, private route: ActivatedRoute, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.clienteForm = this.formBuilder.group({
       
            //atributo: [param1, param2]
-           // param1 -> equivale ao atribuito referencia daquele campo
+           // param1 -> equivale ao valor do campo
            // param2 -> equivale as validações para aquele campo
 
      nome: [
-       this.cliente.nome,
+       '',
        [
          Validators.required, // validação de campo requirido
          Validators.minLength(10), // validação de minimo de caracteres
@@ -32,7 +32,7 @@ export class FormularioPage implements OnInit {
        ]
      ], 
      sobrenome: [
-       this.cliente.sobrenome,
+       '',
        [
          Validators.required, // validação de campo requirido
          Validators.minLength(10), // validação de minimo de caracteres
@@ -41,7 +41,7 @@ export class FormularioPage implements OnInit {
        ]
      ], 
      telefone: [
-       this.cliente.telefone,
+       '',
        [
         Validators.required, // validação de campo requirido
         Validators.minLength(12), // validação de minimo de caracteres
@@ -50,7 +50,7 @@ export class FormularioPage implements OnInit {
       ]
      ], 
      logradouro: [
-       this.cliente.logradouro,
+       '',
        [
         Validators.required, // validação de campo requirido
         Validators.minLength(12), // validação de minimo de caracteres
@@ -59,7 +59,7 @@ export class FormularioPage implements OnInit {
       ]
      ], 
      bairro: [
-       this.cliente.bairro,
+       '',
        [
         Validators.required, // validação de campo requirido
         Validators.minLength(12), // validação de minimo de caracteres
@@ -68,7 +68,7 @@ export class FormularioPage implements OnInit {
       ]
      ], 
      cidade: [
-       this.cliente.cidade,
+       '',
        [
         Validators.required, // validação de campo requirido
         Validators.minLength(12), // validação de minimo de caracteres
@@ -77,7 +77,7 @@ export class FormularioPage implements OnInit {
       ]
      ], 
      estado: [
-       this.cliente.estado,
+       '',
        [
         Validators.required, // validação de campo requirido
         Validators.minLength(12), // validação de minimo de caracteres
@@ -86,7 +86,7 @@ export class FormularioPage implements OnInit {
       ]
      ], 
      cep: [
-       this.cliente.cep,
+       '',
        [
         Validators.required, // validação de campo requirido
         Validators.minLength(8), // validação de minimo de caracteres
@@ -95,7 +95,7 @@ export class FormularioPage implements OnInit {
       ]
      ], 
      complemento: [
-       this.cliente.complemento,
+       '',
        [
         Validators.maxLength(120), // validação de maximo de caracteres
         Validators.pattern(/^[a-zA-Z0-9]+$/)
@@ -103,7 +103,7 @@ export class FormularioPage implements OnInit {
      ]
      , 
      observacoes: [
-       this.cliente.observacoes,
+       '',
        [
         Validators.maxLength(120), // validação de maximo de caracteres
         Validators.pattern(/^[a-zA-Z0-9]+$/)
@@ -111,5 +111,4 @@ export class FormularioPage implements OnInit {
      ]
     });
   }
-
 }
