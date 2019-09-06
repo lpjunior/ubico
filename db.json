@@ -1,0 +1,17 @@
+{
+  "cliente": [
+    {
+      "nome": "Luis",
+      "sobrenome": "Paulo",
+      "telefone": "21212121",
+      "logradouro": "Rua Almirante Teffe",
+      "bairro": "Centro",
+      "cidade": "Niteroi",
+      "estado": "RJ",
+      "cep": "21263121",
+      "complemento": "Proximo a receita federal",
+      "observacoes": "Agora vai!",
+      "id": 1
+    }
+  ]
+}
