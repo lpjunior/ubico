@@ -24,4 +24,18 @@ export class ListPage {
       errorDB => console.log(errorDB)
     );
   }
+
+  editPerfil(id: number) {
+    this.router.navigate(['editar', id]);
+  }
+
+  delPerfil(id: number) {
+    this.clienteService.deleteCliente(id).subscribe(
+      () => {
+        this.router.navigateByUrl('/list');
+        this.listaClientes();
+      },
+      errorDelete => console.log(errorDelete)
+    );
+  }
 }

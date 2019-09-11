@@ -2,7 +2,7 @@
   "cliente": [
     {
       "nome": "Luis",
-      "sobrenome": "Paulo",
+      "sobrenome": "Paulo Lessa",
       "telefone": "21212121",
       "logradouro": "Rua Almirante Teffe",
       "bairro": "Centro",
@@ -10,7 +10,7 @@
       "estado": "RJ",
       "cep": "21263121",
       "complemento": "Proximo a receita federal",
-      "observacoes": "Agora vai!",
+      "observacoes": "Editando o perfil",
       "id": 1
     }
   ]

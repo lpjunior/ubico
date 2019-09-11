@@ -13,6 +13,8 @@ export class FormularioPage implements OnInit {
 
   clienteForm: FormGroup;
   cliente: Cliente;
+  clienteID: number;
+  editable: boolean = false;
   
   constructor(private formBuilder: FormBuilder, 
               private route: ActivatedRoute, 
@@ -32,7 +34,7 @@ export class FormularioPage implements OnInit {
          Validators.required, // validação de campo requirido
          Validators.minLength(4), // validação de minimo de caracteres
          Validators.maxLength(100), // validação de maximo de caracteres
-         //Validators.pattern(/^[a-zA-Z]+$/)
+         //Validators.pattern(/^[a-zA-Z ]+$/)
        ]
      ], 
      sobrenome: [
@@ -41,7 +43,7 @@ export class FormularioPage implements OnInit {
          Validators.required, // validação de campo requirido
          Validators.minLength(4), // validação de minimo de caracteres
          Validators.maxLength(100), // validação de maximo de caracteres
-         //Validators.pattern(/^[a-zA-Z]+$/)
+         //Validators.pattern(/^[a-zA-Z ]+$/)
        ]
      ], 
      telefone: [
@@ -59,7 +61,7 @@ export class FormularioPage implements OnInit {
         Validators.required, // validação de campo requirido
         Validators.minLength(5), // validação de minimo de caracteres
         Validators.maxLength(120), // validação de maximo de caracteres
-       // Validators.pattern(/^[a-zA-Z0-9]+$/)
+        //Validators.pattern(/^[a-zA-Z0-9 ]+$/)
       ]
      ], 
      bairro: [
@@ -68,7 +70,7 @@ export class FormularioPage implements OnInit {
         Validators.required, // validação de campo requirido
         Validators.minLength(5), // validação de minimo de caracteres
         Validators.maxLength(12), // validação de maximo de caracteres
-        //Validators.pattern(/^[a-zA-Z0-9]+$/)
+        //Validators.pattern(/^[a-zA-Z0-9 ]+$/)
       ]
      ], 
      cidade: [
@@ -77,7 +79,7 @@ export class FormularioPage implements OnInit {
         Validators.required, // validação de campo requirido
         Validators.minLength(5), // validação de minimo de caracteres
         Validators.maxLength(120), // validação de maximo de caracteres
-        //Validators.pattern(/^[a-zA-Z0-9]+$/)
+        //Validators.pattern(/^[a-zA-Z0-9 ]+$/)
       ]
      ], 
      estado: [
@@ -86,7 +88,7 @@ export class FormularioPage implements OnInit {
         Validators.required, // validação de campo requirido
         Validators.minLength(2), // validação de minimo de caracteres
         Validators.maxLength(2), // validação de maximo de caracteres
-        //Validators.pattern(/^[a-zA-Z0-9]+$/)
+        //Validators.pattern(/^[a-zA-Z0-9 ]+$/)
       ]
      ], 
      cep: [
@@ -102,7 +104,7 @@ export class FormularioPage implements OnInit {
        '',
        [
         Validators.maxLength(120), // validação de maximo de caracteres
-        //Validators.pattern(/^[a-zA-Z0-9]+$/)
+        //Validators.pattern(/^[a-zA-Z0-9 ]+$/)
       ]
      ]
      , 
@@ -110,10 +112,18 @@ export class FormularioPage implements OnInit {
        '',
        [
         Validators.maxLength(120), // validação de maximo de caracteres
-        //Validators.pattern(/^[a-zA-Z0-9]+$/)
+        //Validators.pattern(/^[a-zA-Z0-9 ]+$/)
       ]
      ]
     });
+
+    this.route.paramMap.subscribe(params => {
+      this.clienteID =+ params.get('id');
+      if(this.clienteID) {
+        this.getCliente(this.clienteID);
+        this.editable = true;
+      }
+    })
   }
 
   addCliente() {
@@ -132,5 +142,42 @@ export class FormularioPage implements OnInit {
           this.clienteForm.reset();
         }
       );
+  }
+
+  getCliente(id: number) {
+    this.clienteService.getCliente(id).subscribe(
+      (clienteDB: Cliente) => this.loadForm(clienteDB),
+      errorDB => console.log(errorDB)
+    );
+  }
+
+  loadForm(cliente: Cliente) {
+    this.clienteForm.patchValue({
+      nome: cliente.nome,
+      sobrenome: cliente.sobrenome,
+      telefone: cliente.telefone,
+      logradouro: cliente.logradouro,
+      bairro: cliente.bairro,
+      cidade: cliente.cidade,
+      estado: cliente.estado,
+      cep: cliente.cep,
+      complemento: cliente.complemento,
+      observacoes: cliente.observacoes
+    });
+  }
+  editCliente() {
+    const clienteEditado = this.clienteForm.getRawValue() as Cliente;
+    clienteEditado.id = this.clienteID;
+
+    this.clienteService.updateCliente(clienteEditado).subscribe(
+      () => {
+        this.router.navigateByUrl('/list');
+        this.clienteForm.reset();
+      },
+      error => {
+        console.log(error);
+        this.clienteForm.reset();
+      }
+    );
   }
 }

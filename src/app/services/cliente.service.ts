@@ -35,7 +35,7 @@ export class ClienteService {
 
   // UPDATE
   updateCliente(cliente: Cliente) {
-    return this.http.put(`${API_URL}/cliente`, cliente, httpOptions);
+    return this.http.put(`${API_URL}/cliente/${cliente.id}`, cliente, httpOptions);
   }
 
   // DELETE

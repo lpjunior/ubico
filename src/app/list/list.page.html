@@ -10,12 +10,29 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let cliente of clientes">
-      {{cliente.nome}}
-      <div class="item-note" slot="end">
-        {{cliente.telefone}}
-      </div>
-    </ion-item>
-  </ion-list>
+  <table class="table table-responsive text-center">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Telefone</th>
+        <th colspan="2">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{ cliente.id }}</td>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.sobrenome }}</td>
+        <td>{{ cliente.telefone }}</td>
+        <td>
+          <button class="btn btn-outline-success btn-sm" (click)="editPerfil(cliente.id)">Editar</button>
+        </td>
+        <td>
+          <button class="btn btn-outline-danger btn-sm" (click)="delPerfil(cliente.id)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </ion-content>

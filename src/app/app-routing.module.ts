@@ -15,7 +15,14 @@ const routes: Routes = [
     path: 'list',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
   },
-  { path: 'formulario', loadChildren: './cliente/formulario/formulario.module#FormularioPageModule' }
+  { 
+    path: 'formulario', 
+    loadChildren: './cliente/formulario/formulario.module#FormularioPageModule' 
+  },
+  { 
+    path: 'editar/:id', 
+    loadChildren: './cliente/formulario/formulario.module#FormularioPageModule' 
+  }
 ];
 
 @NgModule({
