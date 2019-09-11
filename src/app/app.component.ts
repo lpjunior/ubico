@@ -17,6 +17,11 @@ export class AppComponent {
       icon: 'home'
     },
     {
+      title: 'Add',
+      url: '/formulario',
+      icon: 'logo-snapchat'
+    },
+    {
       title: 'List',
       url: '/list',
       icon: 'list'
